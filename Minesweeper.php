@@ -30,42 +30,43 @@ for ($i = 0 ; $i < 40 ; $i++)
     $map[$x][$y] = "M";
 }
 
+
 for ($x = 0 ; $x < 10 ; $x++)
 {
     for ($y = 0 ; $y < 10 ; $y++)
     {
-        if($map[$x][$y] == "?")
+        if($map[$x][$y] === "?")
         {
             $count = 0;
-            if($map[$x-1][$y-1] == "M")
+            if($map[$x-1][$y-1] === "M")
             {
                 $count++;
             }
-            if($map[$x-1][$y] == "M")
+            if($map[$x-1][$y] === "M")
             {
                 $count++;
             }
-            if($map[$x][$y-1] == "M")
+            if($map[$x][$y-1] === "M")
             {
                 $count++;
             }
-            if($map[$x-1][$y+1] == "M")
+            if($map[$x-1][$y+1] === "M")
             {
                 $count++;
             }
-            if($map[$x+1][$y-1] == "M")
+            if($map[$x+1][$y-1] === "M")
             {
                 $count++;
             }
-            if($map[$x+1][$y] == "M")
+            if($map[$x+1][$y] === "M")
             {
                 $count++;
             }
-            if($map[$x][$y+1] == "M")
+            if($map[$x][$y+1] === "M")
             {
                 $count++;
             }
-            if($map[$x+1][$y+1] == "M")
+            if($map[$x+1][$y+1] === "M")
             {
                 $count++;
             }
@@ -73,6 +74,7 @@ for ($x = 0 ; $x < 10 ; $x++)
         }
     }
 }
+
 
 for ($x = 0 ; $x < 10 ; $x++)
 {
@@ -87,3 +89,5 @@ for ($x = 0 ; $x < 10 ; $x++)
 }
 
 echo $data;
+
+?>
