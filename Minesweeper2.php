@@ -27,7 +27,7 @@ for ($i = 0 ; $i < 1200 ; $i++)
 for ($i = 0 ; $i < 1200 ; $i++)
 {
     $temp = $bomb[$i];
-    $x = floor($temp/50);
+    $x = floor($temp/60);
     $y = $temp % 60;
     $map[$x][$y] = "M";
 }
@@ -77,20 +77,18 @@ for ($x = 0 ; $x < 50 ; $x++)
     }
 }
 
-
-echo "<table border=1>";
 for ($x = 0 ; $x < 50 ; $x++)
 {
-    echo "<tr>";
     for ($y = 0 ; $y < 60 ; $y++)
     {
-        echo "<td>";
-        echo $map[$x][$y];
-        echo "</td>";
+        $data = $data . $map[$x][$y];
+        if($y == 59 and $x != 49)
+        {
+            $data = $data . "N";
+        }
     }
-    echo "</tr>";
 }
-echo "</table>";
 
+echo $data;
 
 ?>
