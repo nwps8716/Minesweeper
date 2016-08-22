@@ -1,5 +1,4 @@
 <?php
-$time_start = microtime(true);
 //地圖
 for ($x = 0 ; $x < 50 ; $x++)
 {
@@ -77,7 +76,7 @@ for ($x = 0 ; $x < 50 ; $x++)
         }
     }
 }
-$time_end = microtime(true);
+
 
 echo "<table border=1>";
 for ($x = 0 ; $x < 50 ; $x++)
@@ -93,7 +92,5 @@ for ($x = 0 ; $x < 50 ; $x++)
 }
 echo "</table>";
 
-$time = $time_end - $time_start;
-echo $time;
 
 ?>
