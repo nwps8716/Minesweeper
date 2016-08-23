@@ -1,6 +1,7 @@
 <?php
 $error = TRUE;
 
+$rule = $_GET["map"];
 $new = str_split($_GET["map"]);
 
 $countdata = count($new);
@@ -10,13 +11,29 @@ $n = substr_count($_GET["map"],"N");
 $newn = explode("N",$_GET["map"]);
 $n2 = count($newn);
 
-if ($countdata != 109)
+$j = 0;
+if (!preg_match("/^([0-8MN])+$/",$rule))
 {
-    echo "輸入的字串數量錯誤";
-} elseif ($bomb != 40) {
-    echo "炸彈數量錯誤";
-} elseif ($n != 9 or $n2 != 10) {
-    echo "N數量或是換行錯誤" . "<br>";
+    echo "不符合，輸入的格式錯誤。";
+} elseif ($countdata > 109) {
+    echo "不符合，輸入的字串數量太多。";
+} elseif ($countdata < 109){
+    echo "不符合，輸入的字串數量太少。";
+} elseif ($bomb > 40) {
+    echo "不符合，炸彈數量超過40。";
+} elseif ($bomb < 40){
+    echo "不符合，炸彈數量少於40。";
+} elseif ($n != 9) {
+    echo "不符合，N的數量錯誤。";
+} elseif ($n == 9) {
+    for ($i = 1 ; $i <=9 ; $i++)
+    {
+        if ($new[$i*10 + $j] !== "N")
+        {
+            echo "不符合，N的位置錯誤。";
+        }
+        $j++;
+    }
 }
 
 for ($i = 0 ; $i < 109 ; $i++)
@@ -36,7 +53,6 @@ for ($x = 0 ; $x < 10 ; $x++)
         $i++;
     }
 }
-
 
 $number = 1;
 for ($x = 0 ; $x < 10 ; $x++)
@@ -82,8 +98,8 @@ for ($x = 0 ; $x < 10 ; $x++)
             {
                 $newx = $x + 1;
                 $newy = $y + 1;
-                echo "陣列位置[" . $newy ."][" . $newx . "]";
-                echo "錯誤:" . $number . "<br>";
+                echo "不符合" . $number . ":";
+                echo "陣列位置[" . $newy ."][" . $newx . "]數字錯誤。";
                 $number++;
                 $error = FALSE;
             }
@@ -92,5 +108,5 @@ for ($x = 0 ; $x < 10 ; $x++)
 }
 
 if($error){
-echo "符合";
+    echo "符合";
 }
