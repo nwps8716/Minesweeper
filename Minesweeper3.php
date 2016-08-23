@@ -6,13 +6,16 @@ $countdata = count($new);
 $bomb = substr_count($_GET["map"],"M");
 $n = substr_count($_GET["map"],"N");
 
+$newn = explode("N",$_GET["map"]);
+$n2 = count($newn);
+
 if ($countdata != 109)
 {
     echo "輸入的字串數量錯誤";
 } elseif ($bomb != 40) {
     echo "炸彈數量錯誤";
-} elseif ($n != 9) {
-    echo "換行數量錯誤";
+} elseif ($n != 9 or $n2 != 10) {
+    echo "N數量或是換行錯誤";
 }
 
 for ($i = 0 ; $i < 109 ; $i++)
