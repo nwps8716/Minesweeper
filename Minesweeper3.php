@@ -1,4 +1,5 @@
 <?php
+$error = TRUE;
 
 $new = str_split($_GET["map"]);
 
@@ -15,7 +16,7 @@ if ($countdata != 109)
 } elseif ($bomb != 40) {
     echo "炸彈數量錯誤";
 } elseif ($n != 9 or $n2 != 10) {
-    echo "N數量或是換行錯誤";
+    echo "N數量或是換行錯誤" . "<br>";
 }
 
 for ($i = 0 ; $i < 109 ; $i++)
@@ -84,7 +85,12 @@ for ($x = 0 ; $x < 10 ; $x++)
                 echo "陣列位置[" . $newy ."][" . $newx . "]";
                 echo "錯誤:" . $number . "<br>";
                 $number++;
+                $error = FALSE;
             }
         }
     }
+}
+
+if($error){
+echo "符合";
 }
