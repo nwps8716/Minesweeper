@@ -2,37 +2,64 @@
 $error = TRUE;
 
 $rule = $_GET["map"];
+echo $rule;
 $new = str_split($_GET["map"]);
 
 $countdata = count($new);
+
+$m = strpos($rule,"m");
+
 $bomb = substr_count($_GET["map"],"M");
 $n = substr_count($_GET["map"],"N");
 
-$newn = explode("N",$_GET["map"]);
-$n2 = count($newn);
 
-$j = 0;
-if (!preg_match("/^([0-8MN])+$/",$rule))
+if (!preg_match("/^([0-8MN]+)$/",$rule))
 {
     echo "不符合，輸入的格式錯誤。";
-} elseif ($countdata > 109) {
+    $error = FALSE;
+}
+
+if ($countdata > 109) {
     echo "不符合，輸入的字串數量太多。";
-} elseif ($countdata < 109){
+    $error = FALSE;
+}
+
+if ($countdata < 109){
     echo "不符合，輸入的字串數量太少。";
-} elseif ($bomb > 40) {
-    echo "不符合，炸彈數量超過40。";
-} elseif ($bomb < 40){
-    echo "不符合，炸彈數量少於40。";
-} elseif ($n != 9) {
+    $error = FALSE;
+}
+
+if ($bomb != 40) {
+    echo "不符合，炸彈數量有錯，只有" . $bomb . "顆炸彈。";
+    $error = FALSE;
+}
+
+if ($n != 9) {
     echo "不符合，N的數量錯誤。";
-} elseif ($n == 9) {
+    $error = FALSE;
+}
+
+$j = 0;
+if ($n == 9) {
     for ($i = 1 ; $i <=9 ; $i++)
     {
         if ($new[$i*10 + $j] !== "N")
         {
             echo "不符合，N的位置錯誤。";
+            $error = FALSE;
         }
         $j++;
+    }
+}
+
+if ($m != 0)
+{
+    echo "炸彈大小寫有錯。";
+    for ($i = 0 ; $i < 109 ; $i++)
+    {
+        if ($new[$i] == "m"){
+            $new[$i] == "M";
+        }
     }
 }
 
@@ -44,7 +71,6 @@ for ($i = 0 ; $i < 109 ; $i++)
 }
 
 $i=0;
-
 for ($x = 0 ; $x < 10 ; $x++)
 {
     for ($y = 0 ; $y < 10 ; $y++)
@@ -53,6 +79,7 @@ for ($x = 0 ; $x < 10 ; $x++)
         $i++;
     }
 }
+
 
 $number = 1;
 for ($x = 0 ; $x < 10 ; $x++)
@@ -94,12 +121,11 @@ for ($x = 0 ; $x < 10 ; $x++)
             {
                 $count++;
             }
-            if($newmap[$x][$y] != $count)
+            if($newmap[$x][$y] != $count or $newmap[$x][$y] == "")
             {
-                $newx = $x + 1;
-                $newy = $y + 1;
+                $newlocation = $x*10 + ($y + 1);
                 echo "不符合" . $number . ":";
-                echo "陣列位置[" . $newy ."][" . $newx . "]數字錯誤。";
+                echo "字串位置".$newlocation."數字" . $newmap[$x][$y] . "應該為" . $count;
                 $number++;
                 $error = FALSE;
             }
