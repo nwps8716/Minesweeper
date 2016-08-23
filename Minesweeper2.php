@@ -1,16 +1,17 @@
 <?php
 
-for ($i=0 ; $i<3000 ; $i++)
+for ($i = 0 ; $i < 3000 ; $i++)
 {
-    $bomb[] = $i + 1;
+    $bomb[] = $i;
 }
+
 shuffle($bomb);
 
 for ($x = 0 ; $x < 50 ; $x++)
 {
     for ($y = 0 ; $y < 60 ; $y++)
     {
-        if ($bomb[$x * 60 + $y] <= 1200)
+        if ($bomb[$x * 60 + $y] < 1200)
         {
             $bomb[$x * 60 + $y] = "M";
         }
@@ -22,14 +23,10 @@ for ($x = 0 ; $x < 50 ; $x++)
 {
     for ($y = 0 ; $y < 60 ; $y++)
     {
-        if($map[$x][$y] !== "M")
+        if ($map[$x][$y] !== "M")
         {
             $count = 0;
             if($map[$x-1][$y-1] === "M")
-            {
-                $count++;
-            }
-            if($map[$x-1][$y] === "M")
             {
                 $count++;
             }
@@ -37,11 +34,15 @@ for ($x = 0 ; $x < 50 ; $x++)
             {
                 $count++;
             }
-            if($map[$x-1][$y+1] === "M")
+            if($map[$x-1][$y] === "M")
             {
                 $count++;
             }
             if($map[$x+1][$y-1] === "M")
+            {
+                $count++;
+            }
+            if($map[$x+1][$y+1] === "M")
             {
                 $count++;
             }
@@ -53,7 +54,7 @@ for ($x = 0 ; $x < 50 ; $x++)
             {
                 $count++;
             }
-            if($map[$x+1][$y+1] === "M")
+            if($map[$x-1][$y+1] === "M")
             {
                 $count++;
             }
