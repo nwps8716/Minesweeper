@@ -3,13 +3,19 @@ $error = TRUE;
 
 $rule = $_GET["map"];
 echo $rule;
+
+$m = strpos($rule,"m");
 $new = str_split($_GET["map"]);
+
+if ($m != 0)
+{
+    echo "炸彈大小寫有錯。";
+    $new = str_replace("m","M",$new);
+}
 
 $countdata = count($new);
 
-$m = strpos($rule,"m");
-
-$bomb = substr_count($_GET["map"],"M");
+$bomb = substr_count($_GET["map"],"M") + substr_count($_GET["map"],"m");
 $n = substr_count($_GET["map"],"N");
 
 
@@ -52,17 +58,6 @@ if ($n == 9) {
     }
 }
 
-if ($m != 0)
-{
-    echo "炸彈大小寫有錯。";
-    for ($i = 0 ; $i < 109 ; $i++)
-    {
-        if ($new[$i] == "m"){
-            $new[$i] == "M";
-        }
-    }
-}
-
 for ($i = 0 ; $i < 109 ; $i++)
 {
     if ($new[$i] != "N"){
@@ -71,15 +66,20 @@ for ($i = 0 ; $i < 109 ; $i++)
 }
 
 $i=0;
+echo "<table border=1>";
 for ($x = 0 ; $x < 10 ; $x++)
 {
+    echo "<tr>";
     for ($y = 0 ; $y < 10 ; $y++)
     {
-        $newmap[$x][$y] = $map[$i];
+        echo "<td>";
+        echo $newmap[$x][$y] = $map[$i];
+        echo "</td>";
         $i++;
     }
+    echo "</tr>";
 }
-
+echo "</table>";
 
 $number = 1;
 for ($x = 0 ; $x < 10 ; $x++)
